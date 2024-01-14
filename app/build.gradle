@@ -19,8 +19,14 @@ dependencies {
     // Use JUnit test framework.
     testImplementation libs.junit
 
+
     // This dependency is used by the application.
     implementation libs.guava
+    implementation 'org.apache.kafka:kafka-clients:3.6.1'
+
+    // SLF4J and Logback dependencies
+    implementation 'org.slf4j:slf4j-api:1.7.32'
+    implementation 'ch.qos.logback:logback-classic:1.2.6'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -34,3 +40,18 @@ application {
     // Define the main class for the application.
     mainClass = 'simo.kafkaimp3.App'
 }
+
+// Create a custom task for the first application
+task runProducer(type: JavaExec) {
+    main = 'simo.kafkaimp3.KafkaProducerWrapper'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+// Create a custom task for the second application
+task runConsumer(type: JavaExec) {
+    main = 'simo.kafkaimp3.KafkaConsumerWrapper'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11

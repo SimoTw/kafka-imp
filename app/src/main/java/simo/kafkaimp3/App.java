@@ -3,12 +3,16 @@
  */
 package simo.kafkaimp3;
 
+import simo.kafkaimp3.KafkaProducerWrapper;
+import simo.kafkaimp3.KafkaConsumerWrapper;
+
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        KafkaProducerWrapper p = new KafkaProducerWrapper();
+        p.send();
+        KafkaConsumerWrapper c = new KafkaConsumerWrapper();
+        c.subscribeAndPrint();
     }
 }
